@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Fetch Api</title>
+</head>
+
+<body>
+    <div class="head">
+        <h1>User List </h1>
+    </div>
+    <div class="user-detail">
+        <!-- Fetch Api -->
+        <div id="user-data">
+        </div>
+        <h1 id="log">
+        </h1>
+    </div>
+    <script>
+        fetch("https://jsonplaceholder.typicode.com/users").then((data) => {
+            return data.json();
+        }).then((userData) => {
+            console.log(userData);
+            let gridData = "";
+            userData.map((datas) => {
+                gridData += `<div class="card"> 
+                                <h3>Name: ${datas.name}</h3>
+                                <p>Email: ${datas.email}</p>
+                                <p>Street: ${datas.address.street}</p>
+                                <p>City: ${datas.address.city}</p>
+                            </div>
+                                    `;
+            })
+            document.getElementById("user-data").innerHTML = gridData;
+        }).catch((err) => {
+            document.getElementById("log").innerHTML = err;
+            console.log(err);
+        }) 
+    </script>
+
+</body>
+
+</html>
